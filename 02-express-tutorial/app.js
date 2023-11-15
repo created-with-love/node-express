@@ -1,22 +1,24 @@
-const express = require('express')
+const express = require('express');
+const path = require('path');
+const app = express();
 
-// 4:58:00
-const app = express()
 const PORT = 5000;
 
-app.get('/', (req, res) => {
-    res.send('Home page')
-})
+// setup static and middleware
+app.use(express.static('./public'));
+
+// app.get('/', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, './navbar-app/index.html'))
+// adding to static assets
+// SSR
+// })
+
+app.all('*', (req, res) => {
+  res.status(404).send('Resource not found');
+});
 
 app.listen(PORT, () => {
-    console.log(`Server is started on port ${PORT}`)
-})
+  console.log(`Server is started on port ${PORT}`);
+});
 
-
-// app.get
-// app.post
-// app.put
-// app.delete
-// app.all
-// app.use - for middlewares
-// app.listen - listen app on port
+// 5:18:30
